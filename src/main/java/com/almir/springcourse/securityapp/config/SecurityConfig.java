@@ -12,14 +12,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @AllArgsConstructor
 public class SecurityConfig {
-    private final PersonDetailsService personDetailsService;
-
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
 //        Spring Security and authorization configs
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/auth/login", "/error").permitAll()
+                .antMatchers("/auth/login", "/auth/registration", "/error").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/auth/login")
